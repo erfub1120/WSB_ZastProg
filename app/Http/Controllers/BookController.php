@@ -20,13 +20,8 @@ class BookController extends Controller
         $allData = $request->all();
         $selectedData = $request->only(['title', 'category']);
 
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-                'year' => ['nullable', 'integer', 'between:1450,2100'],
-            'category' => ['required', 'string', 'in:Literatura piękna,Sci-Fi / Fantasy,Biografie,Naukowe'],
-                'description' => ['nullable', 'string', 'max:2000'],
-            'is_available' => ['nullable', 'boolean'],
-        ]);
+
+        $validated = $request->validated();
 
         $validated['is_available'] = $request->boolean('is_available');
 

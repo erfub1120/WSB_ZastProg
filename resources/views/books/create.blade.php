@@ -9,6 +9,17 @@
     <main>
         <h1>Dodaj książkę</h1>
 
+        @if ($errors->any())
+            <div role="alert" style="border: 1px solid #dc2626; color: #b91c1c; margin-bottom: 1rem; padding: 1rem;">
+                <h2>Proszę poprawić błędy w formularzu</h2>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('books.store') }}">
             @csrf
 
@@ -16,14 +27,14 @@
             <input id="title" name="title" type="text" value="{{ old('title') }}" required>
 
             @error('title')
-                <p role="alert">{{ $message }}</p>
+                <p role="alert" style="color: #b91c1c;">{{ $message }}</p>
             @enderror
 
             <label for="year">Rok wydania</label>
-                <input id="year" name="year" type="number" value="{{ old('year') }}">
+            <input id="year" name="year" type="number" value="{{ old('year') }}">
 
             @error('year')
-                <p role="alert">{{ $message }}</p>
+                <p role="alert" style="color: #b91c1c;">{{ $message }}</p>
             @enderror
 
             <label for="category">Kategoria</label>
@@ -39,7 +50,7 @@
             @enderror
 
             <label for="description">Opis książki</label>
-                <textarea id="description" name="description" rows="5">{{ old('description') }}</textarea>
+            <textarea id="description" name="description" rows="5">{{ old('description') }}</textarea>
 
             @error('description')
                 <p role="alert">{{ $message }}</p>
